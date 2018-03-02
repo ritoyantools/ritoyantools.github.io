@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html class="force-scroll no-js" lang="en">
+<head>
+    <title>视野宽度检测</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="浏览器窗口宽度" />
+    <link rel="canonical" href="https://ritoyantools.github.io/" />
+    <meta property='og:url' content='https://ritoyantools.github.io/' />
+    <style type="text/css">
+        @-webkit-viewport{width:device-width;}
+        @-moz-viewport{width:device-width;}
+        @-ms-viewport{width:device-width;}
+        @-o-viewport{width:device-width;}
+        @viewport{width:device-width;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />    
+
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/1[0-1]\./)) {
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(document.createTextNode("@-ms-viewport{width:auto!important}"));
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+        }
+    </script>
+</head>
+<body>
+<h1>您浏览器的视野宽度是多少?</h1>
+<div>
+    <noscript><p>对不起，当前页面需要允许javascript执行.</p></noscript>
+    <p class="no-media-query">您的浏览器不支持CSS媒体查询.</p>
+    <p class="no-resize">您的浏览器不支持设置大小事件.</p>
+    <div class="loading">计算中...</div>
+    <div  class="viewport-diff">
+        <p>选择正确的答案：</p>
+        <div id="options">
+            <a href="#" class="option">
+                <span class="value" id="option1"></span>
+                <span class="details">
+                    <ul>
+                        <li>documentElement.clientWidth;</li>
+                        <li>$(window).width();</li>
+                    </ul>
+                </span>
+                <span class="icon"></span>
+            </a>
+            <a href="#" class="option">
+                <span class="value" id="option2"></span>
+                <span class="details">
+                    <ul>
+                        <li>window.innerWidth;</li>
+                    </ul>
+                </span>
+                <span class="icon"></span>
+            </a>
+        </div>
+    </div>
+    <div class="viewport-same">
+        <div class="option">
+            <span class="value" id="answer"></span>
+            <span class="details">
+                <ul>
+                    <li>window.innerWidth;</li>
+                    <li>documentElement.clientWidth;</li>
+                    <li>$(window).width();</li>
+                </ul>
+            </span>
+            <span class="icon"></span>
+        </div>
+    </div>
+</div>
+
+<a href="#" class="toggle-scroll">滑动滚动条</a>
+
+<script type="text/javascript" src="./js/viewportsize.js"></script>
+<script type="text/javascript" src="./js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    $("html").removeClass("no-js");
+
+    if (window.innerWidth !== undefined && window.innerWidth != document.documentElement.scrollWidth) {
+        $("a.toggle-scroll").show().click(function (e) {
+            e.preventDefault();
+            $("html").toggleClass("force-scroll");
+            updateValues();
+        });
+    }
+    else if (window.innerWidth !== undefined && window.innerWidth == document.documentElement.scrollWidth) {
+        $("html").addClass("no-layout-scroll");
+    }
+
+    var updateValues = function () {
+        var viewportWidth = window.viewportSize.getWidth();
+        $("#answer").html(viewportWidth + "px");
+
+        var $option1 = $("#option1");
+        var $option2 = $("#option2");
+        if (document.documentElement.clientWidth < window.innerWidth) {
+            $option1.html(document.documentElement.clientWidth + "px");
+            $option2.html(window.innerWidth + "px");
+
+            $option1.parent().removeClass("is-correct");
+            $option2.parent().removeClass("is-correct");
+
+            if (document.documentElement.clientWidth == viewportWidth) {
+                $option1.parent().addClass("is-correct");
+            }
+            if (window.innerWidth == viewportWidth) {
+                $option2.parent().addClass("is-correct");
+            }
+            $(".loading, .viewport-same").hide();
+            $(".viewport-diff").show();
+        }
+        else if (document.documentElement.clientWidth > window.innerWidth) {
+            $option1.html(window.innerWidth + "px");
+            $option2.html(document.documentElement.clientWidth + "px");
+
+            $option1.parent().removeClass("is-correct");
+            $option2.parent().removeClass("is-correct");
+
+            if (document.documentElement.clientWidth == viewportWidth) {
+                $option2.parent().addClass("is-correct");
+            }
+            if (window.innerWidth == viewportWidth) {
+                $option1.parent().addClass("is-correct");
+            }
+            $(".loading, .viewport-same").hide();
+            $(".viewport-diff").show();
+        }
+        else if (document.documentElement.clientWidth == window.innerWidth) {
+            $(".loading, .viewport-diff").hide();
+            
+            var msg;
+            if ($("html").hasClass("no-layout-scroll")) {
+                msg = "Your browser's scroll bars don't consume layout space. Try it out in one that does and make your best guess.";
+            }
+            else {
+                msg = "No scroll bars simplifies things a bit.";
+            }
+            if ($(".viewport-same > p").size() < 1) {
+                $(".viewport-same").prepend("<p>" + msg + "</p>")
+            }
+            else {
+                $(".viewport-same > p").first().text(msg);
+            }
+
+            $(".viewport-same").show();
+        }
+        else {
+            $(".loading, .viewport-diff").hide();
+            if (window.innerWidth === undefined) {
+                $("li:contains(window.innerWidth;)").css("text-decoration", "line-through");
+            }
+            $(".viewport-same > p").hide();
+            $(".viewport-same").show();
+        }
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener("resize", updateValues, false);
+        window.addEventListener("DOMContentLoaded", updateValues, false);
+        window.addEventListener("load", updateValues, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent("onload", updateValues);
+        $("html").addClass("no-resize");
+    }
+
+    $("a.option").click(function (e) {
+        e.preventDefault();
+        if (!$("#options").hasClass("show-results")) {
+            $("#options").addClass("show-results");
+        }
+    });
+</script>
+</body>
+</html>
