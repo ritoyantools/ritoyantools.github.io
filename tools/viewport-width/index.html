@@ -1,25 +1,22 @@
-
 <!DOCTYPE html>
 <html class="force-scroll no-js" lang="en">
 <head>
-    <title>视野宽度检测</title>
+    <title>Viewport Width</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <link rel="shortcut icon" href="/favicon.ico?v2" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="description" content="浏览器窗口宽度" />
-    <link rel="canonical" href="https://ritoyantools.github.io/" />
-    <meta property='og:url' content='https://ritoyantools.github.io/' />
-    <style type="text/css">
-        @-webkit-viewport{width:device-width;}
-        @-moz-viewport{width:device-width;}
-        @-ms-viewport{width:device-width;}
-        @-o-viewport{width:device-width;}
-        @viewport{width:device-width;}
-    </style>
-    <link rel="stylesheet" type="text/css" href="./css/main.css" />    
-
-    <script>
+    <meta name="robots" content="noodp,noydir" />
+    <meta name="description" content="Do you know what size your viewport width or height is? Learn how to get the correct values using JavaScript." />
+    <link rel="canonical" href="http://matanich.com" />
+    <meta property='og:locale' content='en_US' />
+    <meta property='og:type' content='website' />
+    <meta property='og:title' content='Tyson Matanich' />
+    <meta property='og:url' content='http://matanich.com' />
+    <meta property='og:site_name' content='Tyson Matanich' />
+    <style type="text/css">@-webkit-viewport{width:device-width;}@-moz-viewport{width:device-width;}@-ms-viewport{width:device-width;}@-o-viewport{width:device-width;}@viewport{width:device-width;}</style>
+<link rel="stylesheet" type="text/css" href="./css/main.css" />    <script>
         if (navigator.userAgent.match(/IEMobile\/1[0-1]\./)) {
             var msViewportStyle = document.createElement("style");
             msViewportStyle.appendChild(document.createTextNode("@-ms-viewport{width:auto!important}"));
@@ -28,14 +25,15 @@
     </script>
 </head>
 <body>
-<h1>您浏览器的视野宽度是多少?</h1>
+
+<h1>What size is your viewport width?</h1>
 <div>
-    <noscript><p>对不起，当前页面需要允许javascript执行.</p></noscript>
-    <p class="no-media-query">您的浏览器不支持CSS媒体查询.</p>
-    <p class="no-resize">您的浏览器不支持设置大小事件.</p>
-    <div class="loading">计算中...</div>
+    <noscript><p>This page requires JavaScript, sorry.</p></noscript>
+    <p class="no-media-query">Your browser does not support CSS media queries.</p>
+    <p class="no-resize">Your browser does not support resize events.</p>
+    <div class="loading">Calculating...</div>
     <div  class="viewport-diff">
-        <p>选择正确的答案：</p>
+        <p>Select the correct answer:</p>
         <div id="options">
             <a href="#" class="option">
                 <span class="value" id="option1"></span>
@@ -71,9 +69,16 @@
             <span class="icon"></span>
         </div>
     </div>
+
+    <p>Try viewing the page in different browsers to see how each handles viewport size. Specifically, try it out in Internet Explorer 9, Firefox, Chrome for Windows, Safari for Windows, and Opera.</p>
 </div>
 
-<a href="#" class="toggle-scroll">滑动滚动条</a>
+<a href="#" class="toggle-scroll">Toggle Scroll Bars</a>
+
+<h2>Get the correct value using JavaScript</h2>
+<p><a href="http://matanich.com/2013/01/07/viewport-size">Learn more</a> about the CSS viewport and <a href="http://github.com/tysonmatanich/viewportSize">download the script</a> to properly detect it.</p>
+<code>var width = viewportSize.getWidth();</code>
+<p>Copy from <a href="http://twitter.com/tysonmatanich">@tysonmatanich</a></p>
 
 <script type="text/javascript" src="./js/viewportsize.js"></script>
 <script type="text/javascript" src="./js/jquery-1.8.3.min.js"></script>
