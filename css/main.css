@@ -76,11 +76,13 @@ a:hover {
   padding: 72px 0 42px 0;
 }
 #head #logo img {
-  width: 366px;
+  width: 200px;
 }
 #head #intro {
   margin-top: 16px;
   color: #999;
+  font-size: 18px;
+  line-height: 27px;
 }
 #capture {
   height: 240px;
@@ -128,7 +130,7 @@ a:hover {
   padding-top: 120px;
 }
 #features h2 {
-  font-size: 18px;
+  font-size: 28px;
   margin: 0;
   padding: 0;
   line-height: 30px;
@@ -138,27 +140,27 @@ a:hover {
 }
 #features ul {
   list-style: none;
-  height: 690px;
   overflow: hidden;
-  width: 813px;
+  width: 100%;
   padding: 0;
   margin: 32px 0 0 -6.5px;
 }
 #features ul li {
   float: left;
   padding: 0;
-  width: 258px;
-  height: 240px;
+  width: 100%;
   margin: 0 6.5px;
   overflow: hidden;
   text-align: center;
 }
 #features ul li img {
-  width: 258px;
-  height: 130px;
+  width: 90%;
 }
 #features ul li p {
   text-align: center;
+  font-size: 20px;
+  margin: 10px auto 50px;
+  color: #999;
 }
 #features ul li p.en {
   color: #c9c9c9;
